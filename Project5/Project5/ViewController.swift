@@ -17,6 +17,7 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(promptForAnswer))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(startGame))
         
         if let startWordsUrl = Bundle.main.url(forResource: "start", withExtension: "txt") {
             if let startWords = try? String(contentsOf: startWordsUrl) {
@@ -30,7 +31,7 @@ class ViewController: UITableViewController {
         startGame()
     }
     
-    func startGame() {
+    @objc func startGame() {
         title = allWords.randomElement()
         usedWords.removeAll(keepingCapacity: true)
         tableView.reloadData()
@@ -66,6 +67,9 @@ class ViewController: UITableViewController {
         let errorTitle: String
         let errorMessage: String
         
+
+        
+        if !(lowerAnswer.count < 3) && !(lowerAnswer == title) {
         if isPossible(word: lowerAnswer) {
             if isOriginal(word: lowerAnswer) {
                 if isReal(word: lowerAnswer) {
@@ -86,6 +90,10 @@ class ViewController: UITableViewController {
         } else {
             errorTitle = "Word not possible"
             errorMessage = "You cant spell that word from \(title!.lowercased())"
+        }
+        } else {
+            errorTitle = "to short or same word"
+            errorMessage = "You got to better than that"
         }
         
         let ac = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: .alert)
