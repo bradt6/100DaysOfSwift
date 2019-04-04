@@ -1,0 +1,23 @@
+{
+    
+    "country":[
+        {
+            "id": 1,
+            "name": "Australia",
+            "language": "English",
+            "population": 25
+        },
+        {
+            "id": 2,
+            "name": "France",
+            "language": "French",
+            "population": 20
+        },
+        {
+            "id": 3,
+            "name": "Greece",
+            "language": "Greek",
+            "population": 5
+        }
+    ]
+}
